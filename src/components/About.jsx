@@ -606,7 +606,7 @@ const About = () => {
                   About Flagship
                 </span>
                 <p className="mb-8 text-justify text-base text-body-color">
-                  Flagship'23 is the inaugural event of entrepreneurship Cell of
+                  Flagship'24 is the inaugural event of entrepreneurship Cell of
                   VNIT that aims to foster innovation, entrepreneurship, and
                   leadership among young minds. This event marks the conclave of
                   pioneering personalities that have proven themselves in
