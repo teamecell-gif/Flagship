@@ -77,7 +77,7 @@ const Glimpses = () => {
     <div id="glimpses" className="carousel my-8 pb-8 bg-[#131424]/30 p-2">
       <motion.div className={textVariant()}>
         <div className="items-center text-center">
-          <h2 className={styles.sectionHeadText}>GLIMPSES</h2>
+          <h2 className={styles.sectionHeadText}>GLIMPSES FLAGSHIP '22</h2>
         </div>
       </motion.div>
       <div className="carousel-images py-4">

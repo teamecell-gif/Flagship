@@ -1,4 +1,9 @@
-import { speaker1, speaker2, speaker3 } from "../assets";
+import {
+  Daksh_sethi_speaker1,
+  speaker2,
+  speaker3,
+  flagship_24_soon,
+} from "../assets";
 
 export const navLinks = [
   {
@@ -17,22 +22,20 @@ export const navLinks = [
 
 const projects = [
   {
-    name: "Ishan Sharma",
+    name: "Daksh Sethi",
     description:
-      "He is a young entrepreneur. Founder of Sentora and Markitup. He is also an YouTuber with over 1.2M+ reach and talks about software development, college and entrepreneurship.",
-    image: speaker1,
+      "He is a TEDx and Josh Talks speaker, corporate trainer, and educational consultant, impacts 40,000 lives through 300 events across 120 institutions nationwide.",
+    image: Daksh_sethi_speaker1,
   },
   {
-    name: "Neha Agarwal",
-    description:
-      "Founder of Mathematically inclined. She is Motivational speaker, educator, mentor. She is also an YouTuber with 1.5M + reach and most beloved mathematics teacher.",
-    image: speaker3,
+    name: "COMING SOON",
+    description: "",
+    image: flagship_24_soon,
   },
   {
-    name: "Sonal Goel",
-    description:
-      "She is an IAS, 2008 batch dedicated to service of nation from past more than a decade. She has also featured in Top 25 Women transforming India by Niti Aayog, United Nations and MyGov.",
-    image: speaker2,
+    name: "COMING SOON",
+    description: "",
+    image: flagship_24_soon,
   },
 ];
 
