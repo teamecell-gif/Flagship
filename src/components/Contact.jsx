@@ -35,7 +35,7 @@ const Contact = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://flagship-registeration-backend.onrender.com/api/register",
+        "https://flagship-registration-bakend.onrender.com/api/register",
         formData
       );
       if (response.status === 200) {
@@ -123,6 +123,7 @@ const Contact = () => {
               className="h2 text-center mb-21"
             >
               Register <span className="text-[blue]">Here</span>
+              
             </motion.h2>
             <motion.form
               variants={fadeIn("up", "spring", 0.5, 0.75)}
