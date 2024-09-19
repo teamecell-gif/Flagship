@@ -1,7 +1,7 @@
 import menu from "./menu.svg";
 import close from "./close.svg";
-
-import speaker1 from "./speaker11.jpg";
+import flagship_24_soon from "./flagship_24_soon.jpeg";
+import Daksh_sethi_speaker1 from "./Daksh_sethi_speaker1.jpg";
 import speaker2 from "./speaker33.jpg";
 import speaker3 from "./speaker3.jpg";
 
