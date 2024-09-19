@@ -606,16 +606,15 @@ const About = () => {
                   About Flagship
                 </span>
                 <p className="mb-8 text-justify text-base text-body-color">
-                  Flagship'23 is the inaugural event of entrepreneurship Cell of
+                  Flagship'24 is the inaugural event of entrepreneurship Cell of
                   VNIT that aims to foster innovation, entrepreneurship, and
                   leadership among young minds. This event marks the conclave of
                   pioneering personalities that have proven themselves in
                   different walks of life .Elite speakers who have demonstrated
                   their expertise on the international stage and can inspire the
                   crowd with their interactions are invited every year . Last
-                  year Flagship'22 was graced by some of the esteemed
-                  personalities like Aman Dhattarwal , Anil Swarup and Shefali
-                  Vijaywargiya
+                  year Flagship'23 was graced by some of the esteemed
+                  personalities like Ishan Sharma , Neha Agarwal and Sonal goel.
                 </p>
                 <a
                   href="/#contact"
