@@ -40,7 +40,7 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        "https://flagship-registeration-backend.onrender.com/api/register",
+        "https://flagship-registration-bakend.onrender.com/api/register",
         formData
       );
       if (response.status === 200) {
