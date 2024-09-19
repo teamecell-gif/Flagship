@@ -20,6 +20,8 @@ const Contact = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(true);
   const [popupMessage, setPopupMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // New state for loader
+
 
   const navigate = useNavigate();
 
@@ -33,6 +35,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "https://flagship-registration-bakend.onrender.com/api/register",
@@ -66,6 +69,7 @@ const Contact = () => {
       setPopupMessage("Registration failed. Please try again.");
     }
     setIsPopupOpen(true);
+    setIsLoading(false);
   };
 
   const closePopup = () => {
@@ -226,12 +230,13 @@ const Contact = () => {
                   <option value="Other">Other</option>
                 </select>
               </div>
+
               <button
                 type="submit"
                 className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent-group hover:shadow-[inset_0_0_0.5rem_4em_blue] hover:translate-y-[-0.5rem] hover:text-[color:var(--hover-b)]"
               >
                 <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
-                  Register
+                  {isLoading ? "Loading..." : "Register"}
                 </span>
               </button>
             </motion.form>
