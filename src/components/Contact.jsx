@@ -8,7 +8,6 @@ import CompletedRegistration from "./completedRegistration";
 import QRCode from "qrcode.react";
 
 const Contact = () => {
-  // const { n } = useParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,9 +19,9 @@ const Contact = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(true);
   const [popupMessage, setPopupMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // New state for loader
 
   const navigate = useNavigate();
-
   const [registrationComplete, setRegistrationComplete] = useState(false);
   const [qrCodeData, setQRCodeData] = useState("");
 
@@ -37,28 +36,22 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading when form submission begins
+
     try {
       const response = await axios.post(
         "https://flagship-registeration-backend.onrender.com/api/register",
         formData
       );
       if (response.status === 200) {
-        console.log("Registration successful");
         setRegistrationComplete(true);
         setIsSuccess(true);
         setPopupMessage("Registration completed successfully.");
         const userDataString = `id:fs-${formData.name}/-19987-12246/registered-19987-12246${formData.phoneNumber}`;
-
-        // Encode the user data as a URL
         const userDataURL = encodeURIComponent(userDataString);
-
-        // Generate the QR code using Google Chart API
         const googleChartAPIURL = `https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=${userDataURL}`;
-
-        // Set the QR code data URL
         setQRCodeData(googleChartAPIURL);
       } else {
-        console.error("Registration failed");
         navigate("/error");
         setIsSuccess(false);
         setPopupMessage("Registration failed. Please try again.");
@@ -69,7 +62,9 @@ const Contact = () => {
       setIsSuccess(false);
       setPopupMessage("Registration failed. Please try again.");
     }
+
     setIsPopupOpen(true);
+    setIsLoading(false); // Stop loading after request completes
   };
 
   const closePopup = () => {
@@ -82,7 +77,7 @@ const Contact = () => {
         <div>
           <div className="bg-gradient-to-r from-slate-900 to-blue-800 ">
             <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
-              <div className="relative isolate overflow-hidden px-6 pt-16  sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+              <div className="relative isolate overflow-hidden px-6 pt-16 sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
                 <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
                   <img
                     className="m-[auto] pb-5"
@@ -96,7 +91,6 @@ const Contact = () => {
                     <br />
                     Click below to know more about E-Cell Vnit
                   </h2>
-
                   <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
                     <a
                       href="https://www.ecellvnit.org/"
@@ -106,15 +100,6 @@ const Contact = () => {
                     </a>
                   </div>
                 </div>
-                {/* <div className="relative mt-16 h-80 lg:mt-8">
-            <img
-              className="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
-              src="https://drive.google.com/file/d/1N85rcpFjV55v--Fwxz03wC6KoFeSxDn7/view?usp=sharing"
-              alt="App screenshot"
-              // width={1824}
-              // height={1080}
-            />
-          </div> */}
               </div>
             </div>
           </div>
@@ -160,6 +145,7 @@ const Contact = () => {
                   id="phoneNumber"
                   name="phoneNumber"
                   autoComplete="phoneNumber"
+                  pattern="\d{10}"
                   required
                   value={formData.phoneNumber}
                   onChange={handleChange}
@@ -173,6 +159,7 @@ const Contact = () => {
                 name="email"
                 autoComplete="email"
                 autoCapitalize="none"
+                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                 style={{ textTransform: "none" }}
                 required
                 value={formData.email}
@@ -186,15 +173,12 @@ const Contact = () => {
                 name="Aemail"
                 autoComplete="Aemail"
                 autoCapitalize="none"
+                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
                 style={{ textTransform: "none" }}
-                // required
                 value={formData.Aemail}
                 onChange={handleChange}
               />
               <div className="relative w-full ">
-                {/* <label htmlFor="collegeName" className="block text-sm font-medium leading-6 text-gray-900">
-          College Name
-        </label> */}
                 <select
                   className="w-full p-2.5 text-gray-500 bg-[#121212] border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
                   name="collegeName"
@@ -230,32 +214,24 @@ const Contact = () => {
                   <option value="Government Medical College Nagpur">
                     Government Medical College Nagpur
                   </option>
-                  <option value="Priyadarshini College of Engineering">
-                    Priyadarshini College of Engineering
-                  </option>
-                  <option value="Other">Other</option>
                 </select>
               </div>
-              <button
-                type="submit"
-                className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent-group hover:shadow-[inset_0_0_0.5rem_4em_blue] hover:translate-y-[-0.5rem] hover:text-[color:var(--hover-b)]"
-              >
-                <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
-                  Register
-                </span>
+
+              {/* Conditional rendering for loader */}
+              <button type="submit" className="btn btn-lg btn-blue w-full">
+                {isLoading ? "Submitting..." : "Register"}
               </button>
             </motion.form>
-            {isPopupOpen && (
-              <Popup
-                message={popupMessage}
-                isSuccess={isSuccess}
-                onClose={closePopup}
-              />
-            )}
           </div>
         </div>
       )}
-      ;
+      {isPopupOpen && (
+        <Popup
+          message={popupMessage}
+          onClose={closePopup}
+          isSuccess={isSuccess}
+        />
+      )}
     </div>
   );
 };
