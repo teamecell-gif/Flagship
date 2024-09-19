@@ -219,6 +219,7 @@ const Contact = () => {
               <button
                 type="submit"
                 className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent-group hover:shadow-[inset_0_0_0.5rem_4em_blue] hover:translate-y-[-0.5rem] hover:text-[color:var(--hover-b)]"
+                disabled={isLoading} // Disable the button when loading
               >
                 <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
                   {isLoading ? "Loading..." : "Register"}
