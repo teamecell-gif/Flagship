@@ -23,15 +23,15 @@ const Hero = () => {
               E-CELL <br /> VNIT <br />
               Flagship'
               <span className="bg-gradient-to-b from-[#5794f0] to-[#7e7070] bg-clip-text text-transparent text-[70px]">
-                24
+                25
               </span>
             </motion.h1>
           </div>
           <div className="flexColStart secondaryText flexhero-des">
             <span>
-              This year Flagship'24 is happening on the 21st of September
+              This year Flagship'25 is happening on the 5th of October
             </span>
-            <span>Venue: VNIT Auditorium from 5 pm</span>
+            <span>Venue: VNIT Auditorium from 5:30 pm</span>
           </div>
 
           <div className="flexCenter stats">

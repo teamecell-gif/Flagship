@@ -22,23 +22,23 @@ export const navLinks = [
 
 const projects = [
   {
-    name: "Daksh Sethi",
+    name: "Comming Soon",
     description:
-      "He is a TEDx and Josh Talks speaker, corporate trainer, and educational consultant, impacts 40,000 lives through 300 events across 120 institutions nationwide.",
-    image: Daksh_sethi_speaker1,
+      "",
+    image: flagship_24_soon,
   },
-  {
-    name: "Ashutosh Pratap",
-    description:
-      "He is a Financial Consultant, Ditital Creator and the founder of Technical Sapiens which has 1M+ community on Instagram",
-    image: speaker2,
-  },
-  {
-    name: "Hiten Lulla",
-    description:
-      "He is a software engineer along with content creater and also he is a great story teller, he is the founder of the Hiten.Codes.",
-    image: speaker3,
-  },
+  // {
+  //   name: "Ashutosh Pratap",
+  //   description:
+  //     "He is a Financial Consultant, Ditital Creator and the founder of Technical Sapiens which has 1M+ community on Instagram",
+  //   image: flagship_24_soon,
+  // },
+  // {
+  //   name: "Hiten Lulla",
+  //   description:
+  //     "He is a software engineer along with content creater and also he is a great story teller, he is the founder of the Hiten.Codes.",
+  //   image: flagship_24_soon,
+  // },
 ];
 
 export { projects };
