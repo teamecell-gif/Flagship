@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import CompletedRegistration from "./CompletedRegistration";
+import CompletedRegistration from "./completedRegistration.jsx";
 
 function RegistrationForm() {
   const [formData, setFormData] = useState({
