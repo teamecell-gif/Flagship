@@ -336,6 +336,9 @@ a {
 .input {
   @apply h-[52px];
 }
+.btn {
+  @apply bg-gradient-to-r from-[#0298F9] to-[#086BEA] text-white px-6 rounded-lg font-medium hover:opacity-90;
+}
 .input {
   @apply w-full h-[52px] rounded-lg pl-6 capitalize;
 }

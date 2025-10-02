@@ -27,6 +27,18 @@ const projects = [
       "",
     image: flagship_24_soon,
   },
+  {
+    name: "Comming Soon",
+    description:
+      "",
+    image: flagship_24_soon,
+  },
+  {
+    name: "Comming Soon",
+    description:
+      "",
+    image: flagship_24_soon,
+  },
   // {
   //   name: "Ashutosh Pratap",
   //   description:

@@ -99,7 +99,7 @@ function RegistrationForm() {
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Email Address
+                  Email Address
                   </label>
                   <input
                     id="email"
@@ -201,11 +201,11 @@ function RegistrationForm() {
                   </select>
                 </div>
 
-                <div className="pt-3">
+                <div className="pt-3 bg-blue-600 rounded-md hover:shadow-lg hover:bg-blue-700 transition-all duration-300">
                   <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex justify-center items-center rounded-md !bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:!bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="w-full flex justify-center items-center rounded-md bg-blue-600"
                   >
                   {isSubmitting ? "Submitting..." : "Register Now"}
                 </button>

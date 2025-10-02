@@ -12,7 +12,7 @@ const About = () => {
         className="pt-12 px-12 sm:pt-10 sm:px-10 lg:pt-[120px] pb-12 lg:pb-[90px] overflow-hidden bg-[#131424]/30"
       >
         <div className="container">
-          <div className="flex flex-wrap items-center justify-between -mx-4">
+          <div className="flex flex-wrap items-center justify-between -mx-4 px-4 px-1">
             <motion.div className="w-full px-4 lg:w-6/12">
               <div className="flex items-center -mx-3 sm:-mx-4">
                 <div className="w-full h-[75%] px-3 sm:px-4 xl:w-1/2">
@@ -605,7 +605,7 @@ const About = () => {
                 <span className="block mb-2 text-[40px] font-semibold text-white">
                   About Flagship
                 </span>
-                <p className="mb-8 text-justify text-base text-body-color">
+                <p className="px-2 mb-8 text-justify text-base text-body-color">
                   Flagship'24 is the inaugural event of entrepreneurship Cell of
                   VNIT that aims to foster innovation, entrepreneurship, and
                   leadership among young minds. This event marks the conclave of

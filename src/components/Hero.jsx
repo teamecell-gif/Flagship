@@ -82,7 +82,7 @@ const Hero = () => {
             // }}
             className="image-container z-[1]"
           >
-            <img src={flagship} alt="houses" />
+            <img src={flagship} alt="houses" className="" />
           </motion.div>
         </div>
         <ParticlesContainer />
