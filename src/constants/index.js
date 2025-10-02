@@ -22,7 +22,7 @@ export const navLinks = [
 
 const projects = [
   {
-    name: "Comming Soon",
+    name: "Anup Gupta",
     description:
       "",
     image: flagship_24_soon,

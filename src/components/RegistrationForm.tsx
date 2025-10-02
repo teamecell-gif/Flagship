@@ -25,7 +25,7 @@ function RegistrationForm() {
 
     try {
       const response = await axios.post(
-        "https://flagship-registeration-backend.onrender.com/api/register",
+        "https://flagship-backend-1.onrender.com/register",
         formData
       );
 
