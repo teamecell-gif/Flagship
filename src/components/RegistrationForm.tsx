@@ -67,7 +67,7 @@ function RegistrationForm() {
             </div>
           </nav>
 
-          <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
             <div className="bg-white rounded-lg shadow-md p-6 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">
                 Event Registration
@@ -201,14 +201,15 @@ function RegistrationForm() {
                   </select>
                 </div>
 
-                <div className="pt-2">
+                <div className="pt-3">
                   <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full flex justify-center items-center rounded-md bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full flex justify-center items-center rounded-md !bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:!bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
-                    {isSubmitting ? "Submitting..." : "Register Now"}
-                  </button>
+                  {isSubmitting ? "Submitting..." : "Register Now"}
+                </button>
+
                 </div>
               </form>
             </div>

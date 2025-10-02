@@ -105,7 +105,7 @@ const Contact = () => {
           </div>
         </div>
       ) : (
-        <div className="container mx-auto py-32 px-5 text-center xl:text-left flex items-center justify-center h-full">
+        <div className="container mx-auto py-5 pb-16 px-5 text-center xl:text-left flex items-center justify-center h-full">
           <div className="flex flex-col w-full max-w-[700px] ">
             <motion.h2
               variants={fadeIn("up", "spring", 0.5, 0.75)}

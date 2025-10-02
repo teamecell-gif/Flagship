@@ -425,7 +425,7 @@ a {
 .carousel-images {
   position: relative;
   border-radius: 10px;
-  height: 500px;
+  /* height: 500px; */
   max-width: 750px;
   margin: auto;
   overflow: hidden;
