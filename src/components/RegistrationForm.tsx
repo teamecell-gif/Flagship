@@ -6,9 +6,8 @@ function RegistrationForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phoneNumber: "",
+    phone: "",
     collegeName: "",
-    Aemail: "",
   });
 
   const [registrationComplete, setRegistrationComplete] = useState(false);
@@ -75,17 +74,13 @@ function RegistrationForm() {
 
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                     Full Name
                   </label>
                   <input
                     id="name"
                     name="name"
                     type="text"
-                    autoComplete="name"
                     placeholder="Your Full Name"
                     required
                     className="block w-full px-3 py-2.5 rounded-md border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors sm:text-sm"
@@ -95,17 +90,13 @@ function RegistrationForm() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                  Email Address
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address
                   </label>
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    autoComplete="email"
                     placeholder="Your email address"
                     required
                     className="block w-full px-3 py-2.5 rounded-md border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors sm:text-sm"
@@ -115,50 +106,23 @@ function RegistrationForm() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="Aemail"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Alternate Email Address
-                  </label>
-                  <input
-                    id="Aemail"
-                    name="Aemail"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="Alternate email address"
-                    required
-                    className="block w-full px-3 py-2.5 rounded-md border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors sm:text-sm"
-                    value={formData.Aemail}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="phoneNumber"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                     WhatsApp Number
                   </label>
                   <input
-                    id="phoneNumber"
-                    name="phoneNumber"
+                    id="phone"
+                    name="phone"
                     type="tel"
-                    autoComplete="tel"
                     placeholder="Phone Number"
                     required
                     className="block w-full px-3 py-2.5 rounded-md border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors sm:text-sm"
-                    value={formData.phoneNumber}
+                    value={formData.phone}
                     onChange={handleChange}
                   />
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="collegeName"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
+                  <label htmlFor="collegeName" className="block text-sm font-medium text-gray-700 mb-2">
                     College Name
                   </label>
                   <select
@@ -172,44 +136,27 @@ function RegistrationForm() {
                     <option value="">Select from below</option>
                     <option value="IIM Nagpur">IIM Nagpur</option>
                     <option value="AIIMS Nagpur">AIIMS Nagpur</option>
-                    <option value="Yeshwantrao Chavan College of Engg (YCCE), Nagpur">
-                      Yeshwantrao Chavan College of Engg (YCCE), Nagpur
-                    </option>
-                    <option value="Cummins College of Engineering for Women, Nagpur">
-                      Cummins College of Engineering for Women, Nagpur
-                    </option>
-                    <option value="Symbiosis Institute of Technology [SIT], Nagpur">
-                      Symbiosis Institute of Technology [SIT], Nagpur
-                    </option>
-                    <option value="GHRaisoni College of Engineering [GHRCE], Nagpur">
-                      GHRaisoni College of Engineering [GHRCE], Nagpur
-                    </option>
-                    <option value="Indian Institute of Information Technology [IIIT], Nagpur">
-                      Indian Institute of Information Technology [IIIT], Nagpur
-                    </option>
-                    <option value="Nagpur Institute of Technology [NIT], Nagpur">
-                      Nagpur Institute of Technology [NIT], Nagpur
-                    </option>
+                    <option value="YCCE Nagpur">YCCE, Nagpur</option>
+                    <option value="Cummins College, Nagpur">Cummins College, Nagpur</option>
+                    <option value="SIT Nagpur">SIT, Nagpur</option>
+                    <option value="GHRCE Nagpur">GHRCE, Nagpur</option>
+                    <option value="IIIT Nagpur">IIIT, Nagpur</option>
+                    <option value="NIT Nagpur">NIT, Nagpur</option>
                     <option value="Ramdeobaba">Ramdeobaba</option>
-                    <option value="Government Medical College Nagpur">
-                      Government Medical College Nagpur
-                    </option>
-                    <option value="Priyadarshini College of Engineering">
-                      Priyadarshini College of Engineering
-                    </option>
+                    <option value="Govt Medical College">Govt Medical College, Nagpur</option>
+                    <option value="Priyadarshini College">Priyadarshini College of Engineering</option>
                     <option value="others">Other</option>
                   </select>
                 </div>
 
                 <div className="pt-3 bg-blue-600 rounded-md hover:shadow-lg hover:bg-blue-700 transition-all duration-300">
                   <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full flex justify-center items-center rounded-md bg-blue-600"
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full flex justify-center items-center rounded-md bg-blue-600 text-white py-2"
                   >
-                  {isSubmitting ? "Submitting..." : "Register Now"}
-                </button>
-
+                    {isSubmitting ? "Submitting..." : "Register Now"}
+                  </button>
                 </div>
               </form>
             </div>
