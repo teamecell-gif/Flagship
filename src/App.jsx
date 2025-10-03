@@ -6,6 +6,7 @@ import CompletedRegistration from "./components/completedRegistration";
 import ErrorPage from "./components/error";
 
 const App = () => {
+  
   return (
     <BrowserRouter>
       <Routes>

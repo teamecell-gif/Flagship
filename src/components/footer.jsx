@@ -15,7 +15,7 @@ const Footer = () => {
                   Flagship&apos;25
                 </p>
                 <p className="text-center text-base mt-4 w-1/2 lg:w-full">
-                  Flagship'24 is the inaugural event of entrepreneurship Cell of VNIT that aims to foster innovation, entrepreneurship, and leadership among young minds.
+                  Flagship'25 is the inaugural event of entrepreneurship Cell of VNIT that aims to foster innovation, entrepreneurship, and leadership among young minds.
                 </p>
               </div>
               <div className="flex flex-col items-center gap-2">

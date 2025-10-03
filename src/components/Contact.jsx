@@ -27,7 +27,11 @@ const Contact = () => {
       body: JSON.stringify(formData),
     });
 
-    if (!response.ok) throw new Error("Failed to register");
+    if (!response.ok) {
+  const error = await response.json();
+  alert(error.message || "Registration failed");
+  return;
+}
 
     // Get PDF as blob
     const blob = await response.blob();
@@ -47,6 +51,8 @@ const Contact = () => {
   } catch (error) {
     console.error("Registration failed:", error);
     alert("Registration failed. Please try again.");
+  } finally {
+    setIsLoading(false);
   }
 
   setIsLoading(false);
