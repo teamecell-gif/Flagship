@@ -16,36 +16,42 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+  e.preventDefault();
+  setIsLoading(true);
 
-    try {
-      const response = await fetch("https://flagship-backend-1.onrender.com/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const API_URL = "https://flagship-backend-1.onrender.com";
+    const response = await fetch(`${API_URL}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
 
-      if (!response.ok) throw new Error("Failed to register");
+    if (!response.ok) throw new Error("Failed to register");
 
-      // Get PDF as blob
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+    // Get PDF as blob
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
 
-      //  Trigger download
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "Ticket.pdf");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (error) {
-      console.error(" Registration failed:", error);
-      alert("Registration failed. Please try again.");
-    }
+    // Open PDF in a new tab
+    window.open(url, "_blank");
 
-    setIsLoading(false);
-  };
+    // Trigger download
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "Ticket.pdf");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+  } catch (error) {
+    console.error("Registration failed:", error);
+    alert("Registration failed. Please try again.");
+  }
+
+  setIsLoading(false);
+};
+
 
   return (
     <div id="contact" className="h-full flex items-center justify-center">
