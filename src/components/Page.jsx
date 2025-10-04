@@ -1,4 +1,4 @@
-import { Works, Contact, Hero, Navbar, About } from "./";
+import { Speakers, Contact, Hero, Navbar, About } from "./";
 import Footer from "./footer";
 import Sponsor from "./sponsors";
 import Glimpses from "./Glimpses";
@@ -15,7 +15,7 @@ const Page = () => {
         <About />
         {/* <Sponsor /> */}
       </div>
-      <Works />
+      <Speakers />
       <Glimpses />
       <Contact />
       <Footer />

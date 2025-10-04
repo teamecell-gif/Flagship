@@ -1,8 +1,9 @@
 import {
-  Daksh_sethi_speaker1,
+  
+  speaker1,
   speaker2,
   speaker3,
-  flagship_24_soon,
+  
 } from "../assets";
 
 export const navLinks = [
@@ -24,20 +25,20 @@ const projects = [
   {
     name: "Anup Gupta",
     description:
-      "",
-    image: flagship_24_soon,
+      "Founder, MathonGo & Angel Investor",
+    image: speaker1,
   },
   {
-    name: "Comming Soon",
+    name: "Tharun Naik",
     description:
-      "",
-    image: flagship_24_soon,
+      "Co-Founder, Adko; 3X TEDx Speaker, IIT KGP Alumnus",
+    image: speaker2,
   },
   {
-    name: "Comming Soon",
+    name: "Sanjay Arora",
     description:
-      "",
-    image: flagship_24_soon,
+      "Founder & CEO, Shells Advertisement",
+    image: speaker3,
   },
   // {
   //   name: "Ashutosh Pratap",
