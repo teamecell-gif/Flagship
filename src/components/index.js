@@ -2,6 +2,6 @@ import Hero from "./Hero";
 import Navbar from "./Navbar";
 import About from "./About";
 import Contact from "./Contact";
-import Works from "./Works";
+import Speakers from "./Speakers";
 
-export { Hero, Navbar, About, Contact, Works };
+export { Hero, Navbar, About, Contact, Speakers };
