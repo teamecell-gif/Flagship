@@ -1,5 +1,5 @@
 import {
-  Daksh_sethi_speaker1,
+  speaker1,
   speaker2,
   speaker3,
   flagship_24_soon,
@@ -24,33 +24,21 @@ const projects = [
   {
     name: "Anup Gupta",
     description:
-      "",
-    image: flagship_24_soon,
+      "Founder, MathonGo \& Angel Investor",
+    image: speaker1,
   },
   {
-    name: "Comming Soon",
+    name: "Tharun Naik",
     description:
-      "",
-    image: flagship_24_soon,
+      "Founder, Adko; 3X TEDx Speaker, IIT KGP Alumnus",
+    image: speaker2,
   },
   {
-    name: "Comming Soon",
+    name: "Sanjay Arora",
     description:
-      "",
-    image: flagship_24_soon,
-  },
-  // {
-  //   name: "Ashutosh Pratap",
-  //   description:
-  //     "He is a Financial Consultant, Ditital Creator and the founder of Technical Sapiens which has 1M+ community on Instagram",
-  //   image: flagship_24_soon,
-  // },
-  // {
-  //   name: "Hiten Lulla",
-  //   description:
-  //     "He is a software engineer along with content creater and also he is a great story teller, he is the founder of the Hiten.Codes.",
-  //   image: flagship_24_soon,
-  // },
+      "Founder & CEO, Shells Advertisement ",
+    image: speaker3,
+  }
 ];
 
 export { projects };
