@@ -4,7 +4,7 @@ import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants"; // You might want to rename this to 'speakers' in your constants file
 import { fadeIn, textVariant } from "../utils/motion";
-import { SpotlightCard } from './SpotlightCard.jsx'; // The curly braces {} mean it's a named import
+import  SpotlightCard  from './SpotlightCard.jsx'; // The curly braces {} mean it's a named import
 
 // Renamed component from Works to Speakers
 const Speakers = () => {
