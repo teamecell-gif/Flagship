@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Flagship '26</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+  <!-- Tailwind Compiled CSS -->
+  <link rel="stylesheet" href="assets/css/tailwind.css" />
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { background: #080d17; color: #e2e2e2; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; }
+
+    /* ── Login ── */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(2,152,249,0.12) 0%, transparent 70%), #080d17;
+    }
+    .login-card {
+      background: #0f1623; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 48px 40px; width: 100%; max-width: 420px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+    }
+    .login-input {
+      width: 100%; background: #080d17; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 12px 16px; color: #e2e2e2;
+      font-family: 'JetBrains Mono', monospace; font-size: 14px;
+      letter-spacing: 2px; outline: none; transition: border-color 0.2s;
+    }
+    .login-input:focus { border-color: #0298f9; }
+    .login-btn {
+      width: 100%; padding: 13px; background: #0298f9; color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
+      font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase;
+      border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s, transform 0.1s;
+    }
+    .login-btn:hover  { background: #0284d8; }
+    .login-btn:active { transform: scale(0.98); }
+
+    /* ── Dashboard ── */
+    #dashboard { display: none; min-height: 100vh; }
+
+    /* ── Topbar ── */
+    .topbar {
+      background: #0f1623; border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 14px 32px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 50;
+    }
+    .topbar-brand { display: flex; align-items: center; gap: 12px; }
+    .topbar-badge {
+      background: rgba(2,152,249,0.15); color: #0298f9;
+      border: 1px solid rgba(2,152,249,0.3); border-radius: 6px;
+      padding: 3px 10px; font-size: 10px; font-weight: 800;
+      letter-spacing: 1.4px; text-transform: uppercase;
+    }
+
+    /* ── Tabs ── */
+    .tab-bar {
+      display: flex; gap: 4px; padding: 20px 32px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: #080d17;
+    }
+    .tab-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; border-radius: 8px 8px 0 0;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; cursor: pointer;
+      border: 1px solid transparent; border-bottom: none;
+      color: #4a5568; background: transparent;
+      transition: color 0.2s, background 0.2s;
+      position: relative; bottom: -1px;
+    }
+    .tab-btn.active {
+      background: #0f1623; color: #e2e2e2;
+      border-color: rgba(255,255,255,0.07);
+    }
+    .tab-btn:hover:not(.active) { color: #a0aab8; }
+
+    /* ── Stat pills ── */
+    .stat-pill {
+      background: #141d2e; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 16px 24px; min-width: 140px;
+    }
+
+    /* ── Search / filter ── */
+    .search-input {
+      background: #0f1623; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 10px 16px 10px 40px;
+      color: #e2e2e2; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; outline: none; width: 280px; transition: border-color 0.2s;
+    }
+    .search-input:focus { border-color: #0298f9; }
+    .filter-select {
+      background: #0f1623; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 10px 14px; color: #e2e2e2;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px;
+      outline: none; cursor: pointer;
+    }
+
+    /* ── Table ── */
+    .table-wrap {
+      background: #0f1623; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      background: #141d2e; padding: 13px 18px; text-align: left;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
+      text-transform: uppercase; color: #4a5568;
+      border-bottom: 1px solid rgba(255,255,255,0.06); white-space: nowrap;
+    }
+    thead th:first-child { width: 48px; text-align: center; }
+    tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(2,152,249,0.04); }
+    tbody td { padding: 14px 18px; font-size: 13.5px; color: #c8d0dc; vertical-align: middle; }
+    tbody td:first-child { text-align: center; color: #4a5568; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+    .td-name  { font-weight: 600; color: #e2e2e2; }
+    .td-email { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a0aab8; }
+    .td-time  { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #4a5568; white-space: nowrap; }
+    .td-ticket { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #4a5568; letter-spacing: 1px; }
+
+    /* ── Badges ── */
+    .role-badge {
+      display: inline-block; padding: 2px 9px; border-radius: 5px;
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .role-student      { background: rgba(2,152,249,0.12);   color: #0298f9; border: 1px solid rgba(2,152,249,0.25); }
+    .role-professional { background: rgba(175,198,255,0.1);  color: #afc6ff; border: 1px solid rgba(175,198,255,0.2); }
+    .role-founder      { background: rgba(255,183,131,0.1);  color: #ffb783; border: 1px solid rgba(255,183,131,0.2); }
+    .arrived-yes { background: rgba(34,197,94,0.1);  color: #22c55e; border: 1px solid rgba(34,197,94,0.25);  padding: 2px 9px; border-radius: 5px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: inline-block; }
+    .arrived-no  { background: rgba(100,116,139,0.1); color: #4a5568; border: 1px solid rgba(100,116,139,0.2); padding: 2px 9px; border-radius: 5px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: inline-block; }
+
+    /* ── Buttons ── */
+    .export-btn {
+      display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px;
+      background: rgba(2,152,249,0.1); border: 1px solid rgba(2,152,249,0.25);
+      border-radius: 8px; color: #0298f9; font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+    }
+    .export-btn:hover { background: rgba(2,152,249,0.18); }
+    .logout-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+      background: transparent; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; color: #4a5568; font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
+    }
+    .logout-btn:hover { color: #e2e2e2; border-color: rgba(255,255,255,0.2); }
+    .del-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 6px;
+      border: 1px solid rgba(255,80,80,0.2); background: rgba(255,80,80,0.06);
+      color: rgba(255,100,100,0.6); cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .del-btn:hover { background: rgba(255,60,60,0.15); border-color: rgba(255,80,80,0.45); color: #ff6060; }
+
+    /* ── Live dot ── */
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      animation: pulse-dot 1.5s ease-in-out infinite; display: inline-block;
+    }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+    /* ── Empty / spinner ── */
+    .empty-state { text-align: center; padding: 64px 24px; color: #4a5568; }
+    .spinner {
+      width: 32px; height: 32px; border: 3px solid rgba(2,152,249,0.2);
+      border-top-color: #0298f9; border-radius: 50%;
+      animation: spin 0.7s linear infinite; margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Confirm overlay ── */
+    .overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.65); backdrop-filter: blur(4px);
+      display: none; align-items: center; justify-content: center;
+    }
+    .overlay.open { display: flex; }
+    .overlay-card {
+      background: #141d2e; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 32px 36px; max-width: 400px;
+      width: calc(100% - 32px); text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+    }
+
+    /* ── QR Scanner ── */
+    #qr-reader {
+      width: 100%; max-width: 420px; border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    #qr-reader video { border-radius: 12px; }
+
+    /* Override html5-qrcode default styles */
+    #qr-reader__dashboard_section_csr button {
+      background: #0298f9 !important; color: #fff !important;
+      border: none !important; border-radius: 8px !important;
+      padding: 10px 20px !important; font-family: 'Plus Jakarta Sans', sans-serif !important;
+      font-weight: 700 !important; font-size: 12px !important;
+      letter-spacing: 1px !important; text-transform: uppercase !important;
+      cursor: pointer !important;
+    }
+    #qr-reader__dashboard_section_csr span { color: #a0aab8 !important; font-size: 12px !important; }
+    #qr-reader__status_span { color: #a0aab8 !important; font-size: 12px !important; }
+    #qr-reader__header_message { color: #a0aab8 !important; font-size: 12px !important; }
+    #qr-reader__camera_selection {
+      background: #0f1623 !important; border: 1px solid rgba(255,255,255,0.1) !important;
+      border-radius: 8px !important; color: #e2e2e2 !important;
+      padding: 8px 12px !important; font-family: 'Plus Jakarta Sans', sans-serif !important;
+      font-size: 12px !important; outline: none !important; width: 100% !important;
+    }
+    #qr-reader img[alt="Info icon"] { display: none !important; }
+
+    /* Scan result card */
+    .scan-result-card {
+      border-radius: 12px; padding: 24px;
+      border: 1px solid; max-width: 420px; width: 100%;
+      animation: fadeIn 0.3s ease;
+    }
+    .scan-result-card.success { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.3); }
+    .scan-result-card.error   { background: rgba(239,68,68,0.08);  border-color: rgba(239,68,68,0.3); }
+    .scan-result-card.already { background: rgba(250,204,21,0.08); border-color: rgba(250,204,21,0.3); }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1e2a3a; border-radius: 3px; }
+
+    /* ── Scan Toast ── */
+    .scan-toast {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: 1px solid;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+    }
+    .scan-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .scan-toast.success { background: rgba(22,163,74,0.15);  border-color: rgba(34,197,94,0.4);  color: #4ade80; }
+    .scan-toast.already { background: rgba(202,138,4,0.15);  border-color: rgba(250,204,21,0.4); color: #fde047; }
+    .scan-toast.invalid { background: rgba(185,28,28,0.15);  border-color: rgba(239,68,68,0.4);  color: #f87171; }
+
+    /* ── Mobile responsive ── */
+    @media (max-width: 640px) {
+      .login-card { padding: 32px 20px; }
+
+      .topbar { padding: 12px 16px; }
+      .topbar .export-btn span:last-child { display: none; } /* hide "Export CSV" text, keep icon */
+      .export-btn { padding: 9px 12px; }
+      .logout-btn span:not(.material-symbols-outlined) { display: none; } /* hide "Logout" text */
+      .logout-btn { padding: 9px 12px; }
+
+      .tab-bar { padding: 12px 12px 0; gap: 4px; }
+      .tab-btn { padding: 9px 12px; font-size: 10px; gap: 5px; }
+
+      #tab-registrations { padding: 16px 12px; }
+      #tab-scanner       { padding: 16px 12px; }
+
+      .stat-pill { padding: 12px 16px; min-width: 0; flex: 1 1 calc(50% - 8px); }
+      .stat-pill .text-3xl { font-size: 1.6rem; }
+
+      .search-input { width: 100%; }
+      .filter-select { width: 100%; }
+
+      /* Make table horizontally scrollable */
+      .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
+      table { min-width: 700px; }
+
+      /* Scanner full width */
+      #qr-reader { max-width: 100%; }
+      .scan-result-card { max-width: 100%; }
+
+      /* Toast wraps on small screens */
+      .scan-toast { white-space: normal; text-align: center; width: calc(100% - 32px); font-size: 13px; padding: 12px 16px; }
+    }
+
+    @media (max-width: 400px) {
+      .stat-pill { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ LOGIN ═══════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4"
+           style="background:rgba(2,152,249,0.1);border:1px solid rgba(2,152,249,0.2);">
+        <span class="material-symbols-outlined" style="color:#0298f9;font-size:22px;">lock</span>
+      </div>
+      <h1 class="text-xl font-bold text-white mb-1">Admin Access</h1>
+      <p class="text-sm" style="color:#a0aab8;">Flagship '26 · E-Cell VNIT</p>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:#4a5568;">Email</label>
+        <input id="pwd-email" type="email" class="login-input" style="letter-spacing:0;" placeholder="admin@ecellvnit.com" autocomplete="email" />
+      </div>
+      <div>
+        <label class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:#4a5568;">Password</label>
+        <input id="pwd-input" type="password" class="login-input" placeholder="••••••••" autocomplete="current-password" />
+        <p id="pwd-error" class="text-red-400 text-xs mt-2 hidden"></p>
+      </div>
+      <button id="login-btn" class="login-btn">Enter Dashboard</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ DASHBOARD ═══════════════════ -->
+<div id="dashboard">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-brand">
+      <span class="font-bold text-white text-sm tracking-tight">Flagship '26</span>
+      <span class="topbar-badge">Admin</span>
+      <span class="live-dot ml-1"></span>
+      <span class="text-xs ml-1" style="color:#4a5568;">Live</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="export-btn" id="export-btn">
+        <span class="material-symbols-outlined" style="font-size:15px;">download</span>
+        Export CSV
+      </button>
+      <button class="logout-btn" id="logout-btn">
+        <span class="material-symbols-outlined" style="font-size:15px;">logout</span>
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="registrations">
+      <span class="material-symbols-outlined" style="font-size:16px;">group</span>
+      Registrations
+    </button>
+    <button class="tab-btn" data-tab="scanner">
+      <span class="material-symbols-outlined" style="font-size:16px;">qr_code_scanner</span>
+      QR Scanner
+    </button>
+  </div>
+
+  <!-- ── TAB: Registrations ── -->
+  <div id="tab-registrations" style="padding:24px 16px;max-width:1400px;margin:0 auto;">
+
+    <!-- Stats -->
+    <div class="flex flex-wrap gap-3 mb-8">
+      <div class="stat-pill">
+        <p class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:#4a5568;">Total</p>
+        <p class="text-3xl font-bold text-white font-mono" id="stat-total">—</p>
+      </div>
+      <div class="stat-pill">
+        <p class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:#4a5568;">Arrived</p>
+        <p class="text-3xl font-bold font-mono" style="color:#22c55e;" id="stat-arrived">—</p>
+      </div>
+      <div class="stat-pill">
+        <p class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:#4a5568;">Students</p>
+        <p class="text-3xl font-bold text-[#0298f9] font-mono" id="stat-students">—</p>
+      </div>
+      <div class="stat-pill">
+        <p class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:#4a5568;">Professionals</p>
+        <p class="text-3xl font-bold text-[#afc6ff] font-mono" id="stat-professionals">—</p>
+      </div>
+      <div class="stat-pill">
+        <p class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:#4a5568;">Founders</p>
+        <p class="text-3xl font-bold text-[#ffb783] font-mono" id="stat-founders">—</p>
+      </div>
+    </div>
+
+    <!-- Search + filter -->
+    <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 mb-5">
+      <div class="relative w-full sm:w-auto">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+              style="font-size:16px;color:#4a5568;">search</span>
+        <input id="search-input" type="text" class="search-input" placeholder="Search name, email, college…" style="width:100%;" />
+      </div>
+      <select id="role-filter" class="filter-select">
+        <option value="">All Roles</option>
+        <option value="student">Student</option>
+        <option value="professional">Professional</option>
+        <option value="founder">Founder</option>
+      </select>
+      <select id="arrived-filter" class="filter-select">
+        <option value="">All Status</option>
+        <option value="yes">Arrived</option>
+        <option value="no">Not Arrived</option>
+      </select>
+      <span id="result-count" class="text-xs font-mono sm:ml-auto" style="color:#4a5568;"></span>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>College</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Ticket ID</th>
+            <th>Status</th>
+            <th>Arrived At</th>
+            <th>Registered At</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="reg-tbody">
+          <tr><td colspan="11">
+            <div class="empty-state">
+              <div class="spinner"></div>
+              <p class="text-sm">Loading…</p>
+            </div>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── TAB: QR Scanner ── -->
+  <div id="tab-scanner" style="display:none;padding:24px 16px;max-width:900px;margin:0 auto;">
+    <div class="mb-6">
+      <h2 class="text-lg font-bold text-white mb-1">Check-in Scanner</h2>
+      <p class="text-sm" style="color:#a0aab8;">Scan a registrant's QR code to mark them as arrived.</p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+      <!-- Camera -->
+      <div class="w-full lg:w-auto">
+        <div id="qr-reader" style="width:100%;max-width:420px;"></div>
+        <div class="flex gap-3 mt-4">
+          <button id="start-scan-btn" class="export-btn">
+            <span class="material-symbols-outlined" style="font-size:15px;">videocam</span>
+            Start Camera
+          </button>
+          <button id="stop-scan-btn" class="logout-btn" style="display:none;">
+            <span class="material-symbols-outlined" style="font-size:15px;">videocam_off</span>
+            Stop
+          </button>
+        </div>
+      </div>
+
+      <!-- Result panel -->
+      <div class="flex-1 w-full">
+        <div id="scan-result-wrap">
+          <div style="background:#0f1623;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:48px 24px;text-align:center;">
+            <span class="material-symbols-outlined" style="font-size:48px;color:#1e2a3a;display:block;margin-bottom:12px;">qr_code_2</span>
+            <p class="text-sm" style="color:#4a5568;">Scan result will appear here</p>
+          </div>
+        </div>
+
+        <!-- Recent scans -->
+        <div class="mt-6">
+          <p class="text-[10px] font-bold uppercase tracking-widest mb-3" style="color:#4a5568;">Recent Check-ins</p>
+          <div id="recent-scans" class="space-y-2">
+            <p class="text-xs font-mono" style="color:#1e2a3a;">No scans yet this session.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /dashboard -->
+
+
+<!-- Scan toast -->
+<div id="scan-toast" class="scan-toast">
+  <span id="scan-toast-icon" class="material-symbols-outlined" style="font-size:20px;"></span>
+  <span id="scan-toast-msg"></span>
+</div>
+
+<!-- ═══════════════════ CONFIRM DELETE ═══════════════════ -->
+<div id="confirm-overlay" class="overlay">
+  <div class="overlay-card">
+    <div class="inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4"
+         style="background:rgba(255,60,60,0.1);border:1px solid rgba(255,60,60,0.2);">
+      <span class="material-symbols-outlined" style="color:#ff6060;font-size:20px;">delete_forever</span>
+    </div>
+    <h3 class="font-bold text-white text-base mb-2">Delete Registration?</h3>
+    <p class="text-sm mb-1" style="color:#a0aab8;">This will permanently remove</p>
+    <p id="confirm-name" class="font-semibold text-white text-sm mb-6">—</p>
+    <div class="flex gap-3 justify-center">
+      <button id="confirm-cancel" style="padding:10px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);color:#a0aab8;background:transparent;cursor:pointer;font-size:13px;font-weight:600;">Cancel</button>
+      <button id="confirm-delete" style="padding:10px 20px;border-radius:8px;background:#c0392b;color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ SCRIPT ═══════════════════ -->
+<script type="module">
+  import { initializeApp }  from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import { initializeFirestore, persistentLocalCache,
+           collection, onSnapshot, query, orderBy,
+           doc, deleteDoc, updateDoc, serverTimestamp, where, getDocs }
+                            from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+                            from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey:            "AIzaSyBPIHcm2Kl288rp0jcsh_8iJBfppWQ2YMk",
+    authDomain:        "flagship-26.firebaseapp.com",
+    projectId:         "flagship-26",
+    storageBucket:     "flagship-26.firebasestorage.app",
+    messagingSenderId: "193055719809",
+    appId:             "1:193055719809:web:1ce767345eeb0022f42880"
+  };
+  const app  = initializeApp(firebaseConfig);
+  const db   = initializeFirestore(app, {
+    localCache: persistentLocalCache()
+  });
+  const auth = getAuth(app);
+
+  let allRegistrations  = [];
+  let unsubscribe       = null;
+  let pendingDeleteId   = null;
+  let pendingDeleteName = null;
+  let html5QrScanner    = null;
+  let recentScans       = [];
+
+  // ── Helpers ──
+  function fmt(ts) {
+    if (!ts) return '—';
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.toLocaleString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:true });
+  }
+  function esc(str) {
+    return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function roleBadge(role) {
+    const cls = {student:'role-student',professional:'role-professional',founder:'role-founder'}[role]||'role-student';
+    return `<span class="role-badge ${cls}">${role||'student'}</span>`;
+  }
+  function arrivedBadge(arrived) {
+    return arrived
+      ? `<span class="arrived-yes">✓ Arrived</span>`
+      : `<span class="arrived-no">Pending</span>`;
+  }
+
+  // ── Render table ──
+  function renderTable(data) {
+    const tbody = document.getElementById('reg-tbody');
+    document.getElementById('result-count').textContent = `${data.length} result${data.length!==1?'s':''}`;
+
+    if (!data.length) {
+      tbody.innerHTML = `<tr><td colspan="11"><div class="empty-state">
+        <span class="material-symbols-outlined" style="font-size:36px;color:#1e2a3a;display:block;margin:0 auto 12px;">inbox</span>
+        <p class="text-sm">No registrations found.</p></div></td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = data.map((r,i) => `
+      <tr>
+        <td>${i+1}</td>
+        <td class="td-name">${esc(r.name)}</td>
+        <td class="td-email">${esc(r.email)}</td>
+        <td>${esc(r.college)}</td>
+        <td class="td-email">${esc(r.phone||'—')}</td>
+        <td>${roleBadge(r.role)}</td>
+        <td class="td-ticket">${esc(r.ticketId||'—')}</td>
+        <td>${arrivedBadge(r.arrived)}</td>
+        <td class="td-time">${r.arrived ? fmt(r.arrivedAt) : '—'}</td>
+        <td class="td-time">${fmt(r.registeredAt)}</td>
+        <td>
+          <div style="display:flex;gap:8px;">
+            ${!r.arrived ? `
+              <button class="checkin-btn" data-id="${r.id}" data-name="${esc(r.name)}" title="Manual Check-In" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#22c55e;border-radius:6px;padding:4px 6px;cursor:pointer;display:inline-flex;">
+                <span class="material-symbols-outlined" style="font-size:15px;">check_circle</span>
+              </button>
+            ` : ''}
+            <button class="del-btn" data-id="${r.id}" data-name="${esc(r.name||'this registration')}" title="Delete" style="background:rgba(255,60,60,0.1);border:1px solid rgba(255,60,60,0.3);color:#ef4444;border-radius:6px;padding:4px 6px;cursor:pointer;display:inline-flex;">
+              <span class="material-symbols-outlined" style="font-size:15px;">delete</span>
+            </button>
+          </div>
+        </td>
+      </tr>`).join('');
+
+    tbody.querySelectorAll('.checkin-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        const name = btn.dataset.name;
+        if(confirm(`Manually check in ${name}?`)) {
+          btn.disabled = true;
+          try {
+            await updateDoc(doc(db,'registrations',id), {
+              arrived: true,
+              arrivedAt: serverTimestamp()
+            });
+            showScanToast('success', `Manually checked in ${name}`);
+          } catch(err) {
+            alert('Failed: ' + err.message);
+            btn.disabled = false;
+          }
+        }
+      });
+    });
+
+    tbody.querySelectorAll('.del-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        pendingDeleteId   = btn.dataset.id;
+        pendingDeleteName = btn.dataset.name;
+        document.getElementById('confirm-name').textContent = pendingDeleteName;
+        document.getElementById('confirm-overlay').classList.add('open');
+      });
+    });
+  }
+
+  function updateStats(data) {
+    document.getElementById('stat-total').textContent        = data.length;
+    document.getElementById('stat-arrived').textContent      = data.filter(r=>r.arrived).length;
+    document.getElementById('stat-students').textContent     = data.filter(r=>r.role==='student').length;
+    document.getElementById('stat-professionals').textContent= data.filter(r=>r.role==='professional').length;
+    document.getElementById('stat-founders').textContent     = data.filter(r=>r.role==='founder').length;
+  }
+
+  function applyFilters() {
+    const q       = document.getElementById('search-input').value.toLowerCase();
+    const role    = document.getElementById('role-filter').value;
+    const arrived = document.getElementById('arrived-filter').value;
+    const filtered = allRegistrations.filter(r => {
+      const mQ = !q    || [r.name,r.email,r.college,r.phone,r.ticketId].some(v=>(v||'').toLowerCase().includes(q));
+      const mR = !role || r.role===role;
+      const mA = !arrived || (arrived==='yes'?r.arrived:!r.arrived);
+      return mQ && mR && mA;
+    });
+    renderTable(filtered);
+  }
+
+  function startListener() {
+    const q = query(collection(db,'registrations'), orderBy('registeredAt','desc'));
+    unsubscribe = onSnapshot(q, snap => {
+      allRegistrations = snap.docs.map(d=>({id:d.id,...d.data()}));
+      updateStats(allRegistrations);
+      applyFilters();
+    }, err => {
+      console.error(err);
+      document.getElementById('reg-tbody').innerHTML =
+        `<tr><td colspan="11"><div class="empty-state"><p class="text-red-400 text-sm">Error: ${err.message}</p></div></td></tr>`;
+    });
+  }
+
+  // ── CSV Export ──
+  function exportCSV() {
+    if (!allRegistrations.length) return;
+    const headers = ['#','Name','Email','College','Phone','Role','Ticket ID','Arrived','Arrived At','Registered At'];
+    const rows = allRegistrations.map((r,i)=>[
+      i+1, r.name||'', r.email||'', r.college||'', r.phone||'',
+      r.role||'', r.ticketId||'', r.arrived?'Yes':'No',
+      r.arrived?fmt(r.arrivedAt):'', fmt(r.registeredAt)
+    ].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(','));
+    const csv  = [headers.join(','),...rows].join('\n');
+    const blob = new Blob([csv],{type:'text/csv'});
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href=url; a.download=`flagship26-${new Date().toISOString().slice(0,10)}.csv`; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // ── Scan Toast ──
+  let toastTimer = null;
+  function showScanToast(type, message) {
+    const toast   = document.getElementById('scan-toast');
+    const iconEl  = document.getElementById('scan-toast-icon');
+    const msgEl   = document.getElementById('scan-toast-msg');
+    const icons   = { success: 'check_circle', already: 'warning', invalid: 'error' };
+
+    if (toastTimer) clearTimeout(toastTimer);
+
+    toast.className = `scan-toast ${type}`;
+    iconEl.textContent = icons[type];
+    msgEl.textContent  = message;
+
+    // Trigger reflow so transition fires even if re-showing
+    void toast.offsetWidth;
+    toast.classList.add('show');
+
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  // ── QR SCANNER ──
+  // ══════════════════════════════════
+  async function handleScan(ticketId) {
+    const wrap = document.getElementById('scan-result-wrap');
+
+    // Look up by ticketId
+    const q    = query(collection(db,'registrations'), where('ticketId','==',ticketId));
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      wrap.innerHTML = `
+        <div class="scan-result-card error">
+          <span class="material-symbols-outlined" style="font-size:36px;color:#ef4444;display:block;margin-bottom:12px;">error</span>
+          <p class="font-bold text-white text-base mb-1">Invalid Ticket</p>
+          <p class="text-sm" style="color:#a0aab8;">No registration found for <span class="font-mono text-red-400">${esc(ticketId)}</span></p>
+        </div>`;
+      addRecentScan(ticketId, null, 'invalid');
+      showScanToast('invalid', 'Invalid ticket — not found');
+      return;
+    }
+
+    const docSnap = snap.docs[0];
+    const data    = docSnap.data();
+
+    if (data.arrived) {
+      wrap.innerHTML = `
+        <div class="scan-result-card already">
+          <span class="material-symbols-outlined" style="font-size:36px;color:#facc15;display:block;margin-bottom:12px;">warning</span>
+          <p class="font-bold text-white text-base mb-1">Already Checked In</p>
+          <p class="font-semibold text-white mb-1">${esc(data.name)}</p>
+          <p class="text-sm mb-1" style="color:#a0aab8;">${esc(data.college||'')} · ${esc(data.role||'')}</p>
+          <p class="text-xs font-mono" style="color:#facc15;">Arrived at ${fmt(data.arrivedAt)}</p>
+        </div>`;
+      addRecentScan(ticketId, data.name, 'already');
+      showScanToast('already', `${data.name} already checked in`);
+      return;
+    }
+
+    // Mark arrived
+    await updateDoc(doc(db,'registrations',docSnap.id), {
+      arrived:   true,
+      arrivedAt: serverTimestamp()
+    });
+
+    wrap.innerHTML = `
+      <div class="scan-result-card success">
+        <span class="material-symbols-outlined" style="font-size:48px;color:#22c55e;display:block;margin-bottom:12px;">check_circle</span>
+        <p class="font-bold text-white text-lg mb-1">Welcome!</p>
+        <p class="font-semibold text-white text-base mb-1">${esc(data.name)}</p>
+        <p class="text-sm mb-2" style="color:#a0aab8;">${esc(data.college||'')} · ${esc(data.role||'')}</p>
+        <p class="text-xs font-mono" style="color:#22c55e;">${esc(ticketId)}</p>
+      </div>`;
+    addRecentScan(ticketId, data.name, 'success');
+    showScanToast('success', `Welcome, ${data.name}! ✓ Checked in`);
+  }
+
+  function addRecentScan(ticketId, name, status) {
+    const colors = { success:'#22c55e', already:'#facc15', invalid:'#ef4444' };
+    const icons  = { success:'check_circle', already:'warning', invalid:'error' };
+    recentScans.unshift({ ticketId, name, status, time: new Date() });
+    if (recentScans.length > 10) recentScans.pop();
+
+    document.getElementById('recent-scans').innerHTML = recentScans.map(s => `
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#0f1623;border:1px solid rgba(255,255,255,0.06);border-radius:8px;">
+        <span class="material-symbols-outlined" style="font-size:16px;color:${colors[s.status]};flex-shrink:0;">${icons[s.status]}</span>
+        <div style="flex:1;min-width:0;">
+          <p style="font-size:13px;font-weight:600;color:#e2e2e2;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.name ? esc(s.name) : '<span style="color:#4a5568">Unknown</span>'}</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4a5568;margin:0;">${esc(s.ticketId)}</p>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4a5568;flex-shrink:0;">${s.time.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true})}</span>
+      </div>`).join('');
+  }
+
+  function startScanner() {
+    if (!window.Html5Qrcode) { alert('QR library not loaded yet, please wait.'); return; }
+    html5QrScanner = new Html5Qrcode('qr-reader');
+    let lastScan = ''; let lastScanTime = 0;
+
+    html5QrScanner.start(
+      { facingMode: 'environment' },
+      { fps: 10, qrbox: { width: 250, height: 250 } },
+      async (decodedText) => {
+        const now = Date.now();
+        // Debounce — don't re-process same code within 3s
+        if (decodedText === lastScan && now - lastScanTime < 3000) return;
+        lastScan = decodedText; lastScanTime = now;
+        await handleScan(decodedText.trim());
+      },
+      () => {} // ignore per-frame errors
+    ).then(() => {
+      document.getElementById('start-scan-btn').style.display = 'none';
+      document.getElementById('stop-scan-btn').style.display  = 'inline-flex';
+    }).catch(err => alert('Camera error: ' + err));
+  }
+
+  function stopScanner() {
+    if (html5QrScanner) {
+      html5QrScanner.stop().then(() => {
+        html5QrScanner.clear();
+        html5QrScanner = null;
+        document.getElementById('start-scan-btn').style.display = 'inline-flex';
+        document.getElementById('stop-scan-btn').style.display  = 'none';
+      });
+    }
+  }
+
+  // ══════════════════════════════════
+  // ── EVENT LISTENERS ──
+  // ══════════════════════════════════
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.getElementById('tab-registrations').style.display = tab==='registrations' ? 'block' : 'none';
+      document.getElementById('tab-scanner').style.display       = tab==='scanner'        ? 'block' : 'none';
+      // Stop scanner when switching away
+      if (tab !== 'scanner') stopScanner();
+    });
+  });
+
+  // Scanner buttons
+  document.getElementById('start-scan-btn').addEventListener('click', startScanner);
+  document.getElementById('stop-scan-btn').addEventListener('click',  stopScanner);
+
+  // Search / filter
+  document.getElementById('search-input').addEventListener('input',   applyFilters);
+  document.getElementById('role-filter').addEventListener('change',   applyFilters);
+  document.getElementById('arrived-filter').addEventListener('change',applyFilters);
+
+  // Export
+  document.getElementById('export-btn').addEventListener('click', exportCSV);
+
+  // Delete confirm
+  document.getElementById('confirm-cancel').addEventListener('click', () => {
+    document.getElementById('confirm-overlay').classList.remove('open');
+    pendingDeleteId = pendingDeleteName = null;
+  });
+  document.getElementById('confirm-overlay').addEventListener('click', e => {
+    if (e.target===document.getElementById('confirm-overlay')) {
+      document.getElementById('confirm-overlay').classList.remove('open');
+    }
+  });
+  document.getElementById('confirm-delete').addEventListener('click', async () => {
+    if (!pendingDeleteId) return;
+    try { await deleteDoc(doc(db,'registrations',pendingDeleteId)); }
+    catch(err) { alert('Delete failed: '+err.message); }
+    finally {
+      document.getElementById('confirm-overlay').classList.remove('open');
+      pendingDeleteId = pendingDeleteName = null;
+    }
+  });
+
+  // ── Auth state — restore session on page reload ──
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard').style.display    = 'block';
+      if (!unsubscribe) startListener();
+    } else {
+      document.getElementById('dashboard').style.display    = 'none';
+      document.getElementById('login-screen').style.display = 'flex';
+    }
+  });
+
+  // Login
+  document.getElementById('login-btn').addEventListener('click', login);
+  document.getElementById('pwd-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+  document.getElementById('pwd-email').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('pwd-input').focus(); });
+
+  async function login() {
+    const email    = document.getElementById('pwd-email').value.trim();
+    const password = document.getElementById('pwd-input').value;
+    const errEl    = document.getElementById('pwd-error');
+    const btn      = document.getElementById('login-btn');
+
+    if (!email || !password) {
+      errEl.textContent = 'Please enter your email and password.';
+      errEl.classList.remove('hidden');
+      return;
+    }
+
+    btn.textContent = 'Signing in…';
+    btn.disabled    = true;
+    errEl.classList.add('hidden');
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // onAuthStateChanged handles the rest
+    } catch (err) {
+      const msgs = {
+        'auth/invalid-email':       'Invalid email address.',
+        'auth/user-not-found':      'No account found with this email.',
+        'auth/wrong-password':      'Incorrect password.',
+        'auth/invalid-credential':  'Incorrect email or password.',
+        'auth/too-many-requests':   'Too many attempts. Try again later.',
+      };
+      errEl.textContent = msgs[err.code] || err.message;
+      errEl.classList.remove('hidden');
+      document.getElementById('pwd-input').value = '';
+    } finally {
+      btn.textContent = 'Enter Dashboard';
+      btn.disabled    = false;
+    }
+  }
+
+  // Logout
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    stopScanner();
+    if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+    allRegistrations = [];
+    await signOut(auth);
+    // onAuthStateChanged handles UI switch
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-email').value = '';
+  });
+
+</script>
+</body>
+</html>

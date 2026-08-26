@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /e26-panel.html
+
+Sitemap: https://flagship.ecellvnit.org/sitemap.xml

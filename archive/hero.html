@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flagship '26 - Emerge from Chaos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700&amp;family=Instrument+Serif&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#ffb783",
+                        "tertiary-container": "#e37601",
+                        "surface-container-highest": "#2d3449",
+                        "secondary-container": "#454747",
+                        "on-background": "#dbe2fd",
+                        "surface-bright": "#31394e",
+                        "surface": "#0b1326",
+                        "inverse-primary": "#0061a2",
+                        "on-tertiary-fixed": "#301400",
+                        "surface-container": "#181f33",
+                        "on-secondary": "#2f3131",
+                        "text-muted": "#A0AAB8",
+                        "surface-container-low": "#141b2e",
+                        "surface-container-lowest": "#060d20",
+                        "background": "#0b1326",
+                        "inverse-surface": "#dbe2fd",
+                        "surface-variant": "#2d3449",
+                        "electric-cyan": "#00E0FF",
+                        "on-secondary-container": "#b4b5b5",
+                        "primary": "#9dcaff",
+                        "on-primary-fixed-variant": "#00497c",
+                        "primary-container": "#0298f9",
+                        "on-tertiary-container": "#492200",
+                        "primary-fixed": "#d1e4ff",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "secondary": "#c6c6c7",
+                        "on-tertiary": "#4f2500",
+                        "outline": "#89919e",
+                        "inverse-on-surface": "#293044",
+                        "on-surface-variant": "#bfc7d4",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "surface-dim": "#0b1326",
+                        "on-primary-fixed": "#001d36",
+                        "surface-container-high": "#22293e",
+                        "secondary-fixed": "#e2e2e2",
+                        "tertiary-fixed": "#ffdcc5",
+                        "surface-charcoal": "#1B1B1B",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "primary-fixed-dim": "#9dcaff",
+                        "on-primary-container": "#002e51",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "error-container": "#93000a",
+                        "outline-variant": "#3f4752",
+                        "on-primary": "#003257",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#9dcaff",
+                        "on-error": "#690005",
+                        "on-surface": "#dbe2fd",
+                        "on-secondary-fixed-variant": "#454747"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Clash Display"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Clash Display"],
+                        "display-xl-mobile": ["Clash Display"],
+                        "display-xl": ["Clash Display"],
+                        "body-md": ["Inter"],
+                        "subheading-serif": ["Instrument Serif"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-xl-mobile": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "subheading-serif": ["32px", { "lineHeight": "40px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .writing-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+        .mesh-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(2,152,249,0.15) 0%, rgba(0,224,255,0.05) 40%, rgba(11,19,38,1) 80%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(2, 152, 249, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden min-h-screen flex flex-col relative mesh-gradient">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-xl bg-surface/10 border-b border-on-surface/10">
+<div class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
+<div class="font-display-xl-mobile md:font-display-xl text-headline-lg-mobile md:text-headline-lg text-electric-cyan tracking-tighter">FLAGSHIP '26</div>
+<div class="hidden md:flex items-center gap-8 font-label-sm text-label-sm uppercase tracking-widest">
+<a class="text-electric-cyan border-b-2 border-electric-cyan pb-1 hover:bg-white/5 transition-all duration-300 scale-95 active:scale-90" href="#">Experience</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-white/5 transition-all duration-300 scale-95 active:scale-90" href="#">Speakers</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-white/5 transition-all duration-300 scale-95 active:scale-90" href="#">Agenda</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-white/5 transition-all duration-300 scale-95 active:scale-90" href="#">Venues</a>
+<span class="w-[1px] h-4 bg-outline-variant mx-2"></span>
+<a class="text-primary hover:text-electric-cyan transition-colors" href="#">Register Now</a>
+</div>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<main class="flex-grow relative w-full h-screen flex items-center justify-center pt-24 pb-12 px-margin-mobile md:px-margin-desktop">
+<!-- Background Animation -->
+<div class="max-w-container-max w-full h-full relative z-10 flex flex-col md:flex-row items-center justify-between">
+<!-- Left: Vertical Title -->
+<div class="absolute left-0 md:static flex-shrink-0 flex items-center h-full pt-20">
+<div class="writing-vertical flex gap-4 items-center">
+<h1 class="font-display-xl text-display-xl-mobile md:text-display-xl text-on-surface tracking-tighter leading-none m-0">FLAGSHIP</h1>
+<span class="font-subheading-serif text-subheading-serif text-text-muted transform rotate-180 m-0 leading-none">2026</span>
+</div>
+</div>
+<!-- Center: Abstract Visual / Asset -->
+<div class="flex-grow flex items-center justify-center relative z-20 px-8 py-16 w-full h-[60vh] md:h-[80vh]">
+<img alt="Flagship '26 Logo" class="object-contain w-full h-full max-w-[450px] drop-shadow-[0_0_60px_rgba(0,224,255,0.4)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9vpWlCq4OmKL-w5bWNQhPNoh85lApTOna82tsQ_hksrqaSlk6XbzepEkgzpQ10IHjOFNn__8eRrGKJlORe5l3l13f375VMeKwoOl5U05htIcg130Dfh7dM1n84dtozJ7lLv-Vur-0ckUKR3xIBSoz12UC2nas746wCERZh6n9cgDkJUfJ3C67NdWttOQXrx_JQx9hUBcCPXUrEyzy9ysIDSdiiTxocM-8OF4U9vBp5kdBb2udn8JVZi5OO94g4UhVyQ"/>
+</div>
+<!-- Right: Stacked Data Indicators -->
+<div class="absolute right-0 top-1/2 -translate-y-1/2 md:static md:translate-y-0 flex-shrink-0 flex flex-col gap-12 pr-4 md:pr-0 items-end text-right">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-widest">ATTENDEES</span>
+<span class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-electric-cyan">2000+</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-widest">SPEAKERS</span>
+<span class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">30+</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-widest">VENUES</span>
+<span class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">3</span>
+</div>
+</div>
+</div>
+<!-- Bottom Actions & Navigation -->
+<div class="absolute bottom-12 w-full left-0 px-margin-mobile md:px-margin-desktop z-30">
+<div class="max-w-container-max mx-auto flex justify-between items-end">
+<!-- Configure/Register Action -->
+<button class="bg-primary-container text-white px-8 py-4 rounded-full font-label-sm text-label-sm uppercase tracking-widest glow-hover transition-all duration-300 flex items-center gap-2">
+                    REGISTER EARLY
+                    <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Thumbnails & Arrows (Simulated) -->
+<div class="hidden md:flex items-center gap-8">
+<div class="flex gap-4">
+<div class="w-24 h-16 glass-panel rounded-lg flex items-center justify-center overflow-hidden cursor-pointer hover:border-electric-cyan transition-colors">
+<div class="w-full h-full bg-surface-container-high relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary-container/20 to-transparent z-10"></div>
+<span class="material-symbols-outlined absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-on-surface/50 group-hover:text-electric-cyan transition-colors" data-icon="hub">hub</span>
+</div>
+</div>
+<div class="w-24 h-16 glass-panel rounded-lg flex items-center justify-center overflow-hidden cursor-pointer hover:border-electric-cyan transition-colors">
+<div class="w-full h-full bg-surface-container-high relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-tr from-electric-cyan/20 to-transparent z-10"></div>
+<span class="material-symbols-outlined absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-on-surface/50 group-hover:text-electric-cyan transition-colors" data-icon="mic">mic</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-on-surface hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-on-surface hover:bg-white/10 hover:border-electric-cyan transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-margin-desktop bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-unit relative z-40">
+<div class="font-display-xl-mobile md:font-display-xl text-headline-lg-mobile md:text-headline-lg text-primary tracking-tighter">FLAGSHIP '26</div>
+<div class="font-body-md text-body-md text-secondary">
+            © 2026 FLAGSHIP SUMMIT. EMERGE FROM CHAOS.
+        </div>
+<div class="flex gap-6 font-body-md text-body-md">
+<a class="text-text-muted hover:text-electric-cyan transition-colors opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="text-text-muted hover:text-electric-cyan transition-colors opacity-80 hover:opacity-100" href="#">Terms</a>
+<a class="text-text-muted hover:text-electric-cyan transition-colors opacity-80 hover:opacity-100" href="#">Press Kit</a>
+</div>
+</footer>
+</body></html>
