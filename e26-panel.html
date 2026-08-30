@@ -130,8 +130,7 @@
       font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
     }
     .role-student      { background: rgba(2,152,249,0.12);   color: #0298f9; border: 1px solid rgba(2,152,249,0.25); }
-    .role-professional { background: rgba(175,198,255,0.1);  color: #afc6ff; border: 1px solid rgba(175,198,255,0.2); }
-    .role-founder      { background: rgba(255,183,131,0.1);  color: #ffb783; border: 1px solid rgba(255,183,131,0.2); }
+
     .arrived-yes { background: rgba(34,197,94,0.1);  color: #22c55e; border: 1px solid rgba(34,197,94,0.25);  padding: 2px 9px; border-radius: 5px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: inline-block; }
     .arrived-no  { background: rgba(100,116,139,0.1); color: #4a5568; border: 1px solid rgba(100,116,139,0.2); padding: 2px 9px; border-radius: 5px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: inline-block; }
 
@@ -381,14 +380,7 @@
         <p class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:#4a5568;">Students</p>
         <p class="text-3xl font-bold text-[#0298f9] font-mono" id="stat-students">—</p>
       </div>
-      <div class="stat-pill">
-        <p class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:#4a5568;">Professionals</p>
-        <p class="text-3xl font-bold text-[#afc6ff] font-mono" id="stat-professionals">—</p>
-      </div>
-      <div class="stat-pill">
-        <p class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:#4a5568;">Founders</p>
-        <p class="text-3xl font-bold text-[#ffb783] font-mono" id="stat-founders">—</p>
-      </div>
+
     </div>
 
     <!-- Search + filter -->
@@ -398,12 +390,7 @@
               style="font-size:16px;color:#4a5568;">search</span>
         <input id="search-input" type="text" class="search-input" placeholder="Search name, email, college…" style="width:100%;" />
       </div>
-      <select id="role-filter" class="filter-select">
-        <option value="">All Roles</option>
-        <option value="student">Student</option>
-        <option value="professional">Professional</option>
-        <option value="founder">Founder</option>
-      </select>
+
       <select id="arrived-filter" class="filter-select">
         <option value="">All Status</option>
         <option value="yes">Arrived</option>
@@ -555,8 +542,7 @@
     return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
   function roleBadge(role) {
-    const cls = {student:'role-student',professional:'role-professional',founder:'role-founder'}[role]||'role-student';
-    return `<span class="role-badge ${cls}">${role||'student'}</span>`;
+    return `<span class="role-badge role-student">${role||'student'}</span>`;
   }
   function arrivedBadge(arrived) {
     return arrived
@@ -636,13 +622,11 @@
     document.getElementById('stat-total').textContent        = data.length;
     document.getElementById('stat-arrived').textContent      = data.filter(r=>r.arrived).length;
     document.getElementById('stat-students').textContent     = data.filter(r=>r.role==='student').length;
-    document.getElementById('stat-professionals').textContent= data.filter(r=>r.role==='professional').length;
-    document.getElementById('stat-founders').textContent     = data.filter(r=>r.role==='founder').length;
   }
 
   function applyFilters() {
     const q       = document.getElementById('search-input').value.toLowerCase();
-    const role    = document.getElementById('role-filter').value;
+    const role    = '';
     const arrived = document.getElementById('arrived-filter').value;
     const filtered = allRegistrations.filter(r => {
       const mQ = !q    || [r.name,r.email,r.college,r.phone,r.ticketId].some(v=>(v||'').toLowerCase().includes(q));

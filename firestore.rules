@@ -14,7 +14,7 @@ service cloud.firestore {
         && request.resource.data.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$')
         && request.resource.data.college is string
         && request.resource.data.college.size() <= 150
-        && request.resource.data.role in ['student', 'professional', 'founder']
+        && request.resource.data.role == 'student'
         && request.resource.data.ticketId is string
         && request.resource.data.arrived == false;
 

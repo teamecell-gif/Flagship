@@ -457,7 +457,8 @@
           college = otherVal || 'Other';
         }
         const phone     = (form.querySelector('#reg-phone')?.value || '').trim();
-        const role      = form.querySelector('input[name="role"]:checked')?.value || 'student';
+        const role      = 'student';
+        const enrollmentNumber = (form.querySelector('#reg-enrollment')?.value || '').trim();
 
         if (!name || !email || !college) {
           showToast('Please fill all required fields.', 'error');
@@ -494,6 +495,7 @@
             college,
             phone,
             role,
+            enrollmentNumber,
             ticketId,
             arrived:      false,
             arrivedAt:    null,
@@ -509,7 +511,7 @@
           }
 
           // Cache locally and render branded canvas ticket
-          localStorage.setItem('f26_ticket', JSON.stringify({ticketId, name, email, college, role}));
+          localStorage.setItem('f26_ticket', JSON.stringify({ticketId, name, email, college, role, enrollmentNumber}));
           showTicket(ticketId, name, college, role);
 
         } catch (err) {
@@ -951,21 +953,9 @@
       </div>
 
       <div>
-        <label class="block font-sans text-label-caps text-on-surface-variant uppercase tracking-wider mb-3">I am a</label>
-        <div class="flex flex-wrap gap-3">
-          <label class="flex items-center gap-2 cursor-pointer group">
-            <input type="radio" name="role" value="student" class="sr-only peer" checked />
-            <span class="px-4 py-2 border border-glass-stroke rounded-DEFAULT font-sans text-label-caps uppercase tracking-wider text-on-surface-variant peer-checked:border-primary-container peer-checked:text-primary-container peer-checked:bg-primary/10 transition-all cursor-pointer">Student</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer group">
-            <input type="radio" name="role" value="professional" class="sr-only peer" />
-            <span class="px-4 py-2 border border-glass-stroke rounded-DEFAULT font-sans text-label-caps uppercase tracking-wider text-on-surface-variant peer-checked:border-primary-container peer-checked:text-primary-container peer-checked:bg-primary/10 transition-all cursor-pointer">Professional</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer group">
-            <input type="radio" name="role" value="founder" class="sr-only peer" />
-            <span class="px-4 py-2 border border-glass-stroke rounded-DEFAULT font-sans text-label-caps uppercase tracking-wider text-on-surface-variant peer-checked:border-primary-container peer-checked:text-primary-container peer-checked:bg-primary/10 transition-all cursor-pointer">Founder</span>
-          </label>
-        </div>
+        <label for="reg-enrollment" class="block font-sans text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Enrollment Number</label>
+        <input id="reg-enrollment" type="text" placeholder="e.g. BT22CSE001"
+          class="form-input w-full bg-surface-container-lowest border-b border-outline text-on-surface px-4 py-3 transition-colors duration-200 font-sans text-body-md placeholder:text-on-surface-variant/40" />
       </div>
 
       <button type="submit"
@@ -975,7 +965,7 @@
       </button>
 
       <p class="text-center font-sans text-label-caps text-on-surface-variant uppercase tracking-wider">
-        Free entry &middot; Open to all students &amp; professionals
+        Free entry &middot; Open to all students
       </p>
 
     </form>
