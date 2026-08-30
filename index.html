@@ -432,30 +432,13 @@
       const form = document.getElementById('reg-form');
       if (!form) return;
 
-      const collegeSelect = document.getElementById('reg-college');
-      const collegeOtherInput = document.getElementById('reg-college-other');
-      if (collegeSelect && collegeOtherInput) {
-        collegeSelect.addEventListener('change', () => {
-          if (collegeSelect.value === 'Other') {
-            collegeOtherInput.classList.remove('hidden');
-            collegeOtherInput.focus();
-          } else {
-            collegeOtherInput.classList.add('hidden');
-          }
-        });
-      }
-
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const btn       = form.querySelector('button[type="submit"]');
         const name      = form.querySelector('#reg-name').value.trim();
         const email     = form.querySelector('#reg-email').value.trim();
-        let college     = (form.querySelector('#reg-college')?.value || '').trim();
-        if (college === 'Other') {
-          const otherVal = (form.querySelector('#reg-college-other')?.value || '').trim();
-          college = otherVal || 'Other';
-        }
+        const college   = 'VNIT Nagpur';
         const phone     = (form.querySelector('#reg-phone')?.value || '').trim();
         const role      = 'student';
         const enrollmentNumber = (form.querySelector('#reg-enrollment')?.value || '').trim();
@@ -906,6 +889,10 @@
     <div class="text-center space-y-2 mb-8">
       <h3 class="font-sans font-bold text-headline-sm text-on-surface" style="letter-spacing:-0.4px;">Registration Details</h3>
       <p class="text-body-md" style="color:#a0aab8;">We just need a few details to secure your spot.</p>
+      <div class="inline-flex items-center gap-2 mt-3 px-4 py-1.5 rounded-full border border-[#0298f9]/30 bg-[#0298f9]/10">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#0298f9;">school</span>
+        <span class="font-sans text-[11px] font-bold uppercase tracking-widest" style="color:#0298f9;">VNIT Nagpur Students Only</span>
+      </div>
     </div>
     
     <form id="reg-form" class="space-y-6" novalidate>
@@ -925,25 +912,12 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label for="reg-college" class="block font-sans text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">College / Institution</label>
-          <select id="reg-college"
-            class="form-input w-full border-b border-outline text-on-surface px-4 py-3 transition-colors duration-200 font-sans text-body-md" style="background-color: #080d17; color: #f1f5f9; outline: none;">
-            <option value="" disabled selected>Select College</option>
-            <option value="VNIT Nagpur">VNIT Nagpur</option>
-            <option value="IIM Nagpur">IIM Nagpur</option>
-            <option value="AIIMS Nagpur">AIIMS Nagpur</option>
-            <option value="YCCE Nagpur">YCCE Nagpur</option>
-            <option value="Cummins College">Cummins College</option>
-            <option value="SIT Nagpur">SIT Nagpur</option>
-            <option value="GHRCE Nagpur">GHRCE Nagpur</option>
-            <option value="IIIT Nagpur">IIIT Nagpur</option>
-            <option value="NIT Nagpur">NIT Nagpur</option>
-            <option value="Ramdeobaba">Ramdeobaba</option>
-            <option value="Govt Medical College">Govt Medical College</option>
-            <option value="Other">Other</option>
-          </select>
-          <input id="reg-college-other" type="text" placeholder="Enter college name"
-            class="form-input w-full border-b border-outline text-on-surface px-4 py-3 mt-2 transition-colors duration-200 font-sans text-body-md placeholder:text-on-surface-variant/40 hidden" style="background-color: #080d17; color: #f1f5f9;" />
+          <label class="block font-sans text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">College</label>
+          <div class="form-input w-full border-b border-outline text-on-surface px-4 py-3 font-sans text-body-md flex items-center gap-2" style="background-color: #080d17; color: #f1f5f9; opacity: 0.7; cursor: default;">
+            <span class="material-symbols-outlined" style="font-size:16px;color:#0298f9;">verified</span>
+            VNIT Nagpur
+          </div>
+          <input id="reg-college" type="hidden" value="VNIT Nagpur" />
         </div>
         <div>
           <label for="reg-phone" class="block font-sans text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Phone Number</label>
@@ -965,7 +939,7 @@
       </button>
 
       <p class="text-center font-sans text-label-caps text-on-surface-variant uppercase tracking-wider">
-        Free entry &middot; Open to all students
+        Free entry &middot; Exclusively for VNIT Nagpur students
       </p>
 
     </form>
